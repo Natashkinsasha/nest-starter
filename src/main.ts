@@ -64,7 +64,7 @@ async function bootstrap() {
     new AuthExceptionFilter(logger),
   );
   const document = buildSwaggerDocument(app);
-  // SwaggerModule.setup('api-doc', app, document);
+  SwaggerModule.setup('api-doc', app, document);
   const configService: ConfigService = app.get<ConfigService>(ConfigService);
   const PORT = configService.getConfig().PORT;
   await app.listen(PORT, async () => {

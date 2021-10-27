@@ -1,7 +1,7 @@
 {
   "PROJECT_NAME": "starter",
   "MIN_RESPONSE_TIME": 10000,
-  "LOG_LEVEL": "state",
+  "LOG_LEVEL": "debug",
   "MONGO_URL": "mongodb://localhost:27017",
   "REDIS_URL": "redis://localhost:6379",
   "PORT": 3000,

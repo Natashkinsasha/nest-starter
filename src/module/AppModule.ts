@@ -9,6 +9,7 @@ import Logger from 'brologger';
 import { LoggerModule } from './LoggerModules';
 import * as bodyParser from 'body-parser';
 import MongoModule from './MongoModule';
+import ResponseTimeMiddleware from '../midlaware/ResponseTimeMiddleware';
 
 @Module({
   imports: [ConfigModule, LoggerModule, MongoModule],
@@ -23,7 +24,7 @@ export default class AppModule implements NestModule {
         helmet(),
         compression(),
         requestId(),
-        // ResponseTimeMiddleware,
+        ResponseTimeMiddleware,
         LoggerMiddleware,
         bodyParser.json({ limit: '5mb' }),
       )
