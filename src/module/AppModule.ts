@@ -10,6 +10,8 @@ import { LoggerModule } from './LoggerModules';
 import * as bodyParser from 'body-parser';
 import MongoModule from './MongoModule';
 import ResponseTimeMiddleware from '../midlaware/ResponseTimeMiddleware';
+import MongoController from '../controller/MongoController';
+import { AuthGuard } from '../guard/AuthGuard';
 
 @Module({
   imports: [ConfigModule, LoggerModule, MongoModule],
