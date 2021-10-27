@@ -1,0 +1,5 @@
+export enum AuthErrorCode {
+  NOT_ACCESS = 'NOT_ACCESS',
+  INVALID_TOKEN = 'INVALID_TOKEN',
+  ABSENT_TOKEN = 'ABSENT_TOKEN',
+}

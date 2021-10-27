@@ -1,0 +1,12 @@
+{
+  "PROJECT_NAME": "starter",
+  "MIN_RESPONSE_TIME": 10000,
+  "LOG_LEVEL": "state",
+  "MONGO_URL": "mongodb://localhost:27017",
+  "REDIS_URL": "redis://localhost:6379",
+  "PORT": 3000,
+  "SECRET_KEY": "dsgyfd8gye78f",
+  "ACCESS_TOKEN_LIFE_TIME": "24h",
+  "REFRESH_TOKEN_LIFE_TIME": "7d",
+  "TOKEN_HEADER": "authorization"
+}
