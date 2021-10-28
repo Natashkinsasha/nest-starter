@@ -45,6 +45,7 @@ const loggerFactory = {
       },
       levels,
       transports,
+      source: false,
     });
     logger.on('error', async (err: Error) => {
       // eslint-disable-next-line no-console

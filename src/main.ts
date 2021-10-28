@@ -1,4 +1,4 @@
-import { NestFactory } from '@nestjs/core';
+import { NestFactory, Reflector } from '@nestjs/core';
 import axios, { AxiosError } from 'axios';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import Logger from 'brologger';
@@ -14,6 +14,8 @@ import MongoValidationError from './filter/MongoValidationError';
 import { VersioningType } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import AuthExceptionFilter from './filter/AuthExceptionFilter';
+import JwtService from './service/JwtService';
+import { AuthGuard } from './guard/AuthGuard';
 
 axios.interceptors.response.use(
   (response) => {
@@ -47,13 +49,15 @@ function buildSwaggerDocument(app: NestExpressApplication) {
   return SwaggerModule.createDocument(app, options);
 }
 
-async function bootstrap() {
+export async function createApp() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   const logger: Logger = app.get<Logger>('Logger');
   app.useLogger(new NestLoggerService(logger));
   app.setGlobalPrefix('api');
   app.enableVersioning({
     type: VersioningType.URI,
+    prefix: 'v',
+    defaultVersion: '1',
   });
   app.set('trust proxy');
   app.useGlobalFilters(
@@ -65,8 +69,18 @@ async function bootstrap() {
   );
   const document = buildSwaggerDocument(app);
   SwaggerModule.setup('api-doc', app, document);
+  const jwtService: JwtService = app.get<JwtService>(JwtService);
+  const reflector = app.get<Reflector>(Reflector);
+  const configService: ConfigService = app.get<ConfigService>(ConfigService);
+  app.useGlobalGuards(new AuthGuard(reflector, configService, jwtService));
+  return app;
+}
+
+async function bootstrap() {
+  const app = await createApp();
   const configService: ConfigService = app.get<ConfigService>(ConfigService);
   const PORT = configService.getConfig().PORT;
+  const logger: Logger = app.get<Logger>('Logger');
   await app.listen(PORT, async () => {
     logger.log('state', `Server started on port: ${PORT}`);
   });

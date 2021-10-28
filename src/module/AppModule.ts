@@ -10,11 +10,11 @@ import { LoggerModule } from './LoggerModules';
 import * as bodyParser from 'body-parser';
 import MongoModule from './MongoModule';
 import ResponseTimeMiddleware from '../midlaware/ResponseTimeMiddleware';
-import MongoController from '../controller/MongoController';
-import { AuthGuard } from '../guard/AuthGuard';
+import UserModule from './UserModule';
+import AuthModule from './AuthModule';
 
 @Module({
-  imports: [ConfigModule, LoggerModule, MongoModule],
+  imports: [ConfigModule, LoggerModule, MongoModule, UserModule, AuthModule],
 })
 export default class AppModule implements NestModule {
   constructor(@Inject('Logger') private readonly logger: Logger) {}

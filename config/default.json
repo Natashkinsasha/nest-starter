@@ -3,7 +3,7 @@
   "MIN_RESPONSE_TIME": 10000,
   "LOG_LEVEL": "debug",
   "MONGO_URL": "mongodb://localhost:27017",
-  "REDIS_URL": "redis://localhost:6379",
+  "REDIS_URL": "redis://host.docker.internal:6379",
   "PORT": 3000,
   "SECRET_KEY": "dsgyfd8gye78f",
   "ACCESS_TOKEN_LIFE_TIME": "24h",

@@ -7,7 +7,7 @@ import ConfigService from './ConfigService';
 
 @Injectable()
 export default class JwtService {
-  constructor(@Inject('ConfigService') private configService: ConfigService) {}
+  constructor(private configService: ConfigService) {}
 
   public createTokens = (
     user: User,

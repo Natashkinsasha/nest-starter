@@ -5,7 +5,7 @@ import MongoMaintainer from '../maintainer/MongoMaintainer';
 
 @ApiTags('mongo')
 @ApiBearerAuth()
-@Controller('mongo')
+@Controller({ path: 'mongo' })
 export default class MongoController {
   constructor(private readonly mongoMaintainer: MongoMaintainer) {}
 
